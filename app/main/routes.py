@@ -16,7 +16,7 @@ def list_scripts():
         return jsonify({'error': str(e)}), 500
 
 
-@bp.route('/api/scripts/<script_name>/config')
+@bp.route('/api/scripts/<script_name>/config', methods=['GET'])
 def get_script_config(script_name):
     """Get form configuration for a script"""
     try:
