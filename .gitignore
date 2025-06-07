@@ -17,6 +17,9 @@ build/
 .idea/
 docs/_build/
 .vscode
+logs/
+scripts/*.yaml
+scripts/*.py
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files

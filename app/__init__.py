@@ -1,11 +1,11 @@
-from flask import Flask
-from pathlib import Path
-from app.config import Config
-
 import os
 import logging
+from pathlib import Path
 from logging.handlers import RotatingFileHandler
 
+from flask import Flask
+
+from app.config import Config
 
 def create_app():
     """Application factory function"""
@@ -32,5 +32,8 @@ def create_app():
     app.logger.addHandler(file_handler)
     app.logger.setLevel(logging.INFO)
     app.logger.info('Tymbr startup')
+
+    from app.main import bp as main_bp
+    app.register_blueprint(main_bp)
 
     return app
