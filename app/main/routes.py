@@ -1,7 +1,13 @@
-from flask import jsonify, current_app, request
+from flask import jsonify, current_app, request, render_template
 
 from app.main import bp
 from app.core.script_runner import get_script_runner
+
+
+@bp.route('/', methods=['GET'])
+def index():
+    """Serve the main interface"""
+    return render_template('index.html')
 
 
 @bp.route('/api/scripts', methods=['GET'])
