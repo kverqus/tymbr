@@ -84,7 +84,7 @@ def health_check():
         })
     except Exception as e:
         current_app.logger.error(f"Health check failed: {e}")
-        
+
         return jsonify({
             'status': 'unhealthy',
             'error': str(e)
