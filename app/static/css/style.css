@@ -1,0 +1,252 @@
+/* Custom styles to complement Bulma */
+
+/* Script Grid Layout */
+.script-grid {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Script Cards */
+.script-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+}
+
+.script-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.script-card:active {
+    transform: translateY(-2px);
+}
+
+.script-card .card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.script-card .content {
+    flex-grow: 1;
+}
+
+/* Favorite Star */
+.favorite-star {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.favorite-star:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+.favorite-star.is-favorited {
+    background: #ffdd57;
+    color: #947600;
+}
+
+/* Sidebar Items */
+.sidebar-script-item {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.sidebar-script-item:hover {
+    background: #fafafa;
+    border-color: #3273dc;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.sidebar-script-item:hover h6 {
+    color: var(--bulma-dark)!important;
+}
+
+.sidebar-script-item h6 {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.sidebar-script-item .script-time {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* Form Styling */
+.form-field {
+    margin-bottom: 1.5rem;
+}
+
+.form-field .label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-field .help {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.required {
+    color: #ff3860;
+}
+
+/* Results */
+.result-content,
+.error-content {
+    font-family: 'Courier New', Monaco, monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+    background: #f5f5f5;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+/* Loading States */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.fa-pulse {
+    animation: spin 1s linear infinite;
+}
+
+/* Hero gradient */
+.hero.is-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .script-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .container.is-fluid {
+        padding: 0.5rem;
+    }
+    
+    .columns.is-gapless .column.is-3 {
+        display: none;
+    }
+    
+    .mobile-sidebar-toggle {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero.is-medium .hero-body {
+        padding: 1.5rem;
+    }
+    
+    .title.is-1 {
+        font-size: 2rem !important;
+    }
+    
+    .script-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Custom scrollbar for sidebar */
+.menu {
+    overflow-y: auto;
+}
+
+.menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.menu::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* No items states */
+.no-favorites,
+.no-recent {
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+    border: 2px dashed #dbdbdb;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+/* Enhanced button states */
+.button.is-loading {
+    color: transparent;
+}
+
+.button.is-loading::after {
+    animation: spin 0.5s infinite linear;
+    border: 2px solid #dbdbdb;
+    border-radius: 290486px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: "";
+    display: block;
+    height: 1em;
+    position: relative;
+    width: 1em;
+}
+
+/* Smooth transitions */
+.script-overview,
+.script-interface {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tags styling for metadata */
+.tags .tag {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}

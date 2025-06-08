@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tymbr</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fas.all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="has-background-dark">
+    <!-- Hero Header -->
+    <section class="hero is-primary is-small">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-1 has-text-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 12 12"><path fill="currentColor" d="M10 11H1v-1H0v2h10Zm0 0h1V5h-1v4H9V7H8V2H7v5H6V4H4V2H3v1H1v1h2v1h2v2H2v1h6v1H2V8H1v2h9ZM0 5h1V4H0Zm0-2h1V2H0Zm5 0h1V2h1V1H4v1h1Zm0 0"/></svg>
+                    tymbr
+                </h1>
+                <h2 class="subtitle is-4 has-text-light">
+                    Point. Click. Python.
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container is-fluid mt-4">
+        <div class="columns is-gapless">
+            <!-- Sidebar -->
+            <div class="column is-3">
+                <aside class="menu p-4" style="min-height: calc(100vh - 160px);">
+                    <!-- Favorites Section -->
+                    <div class="mb-5">
+                        <p class="menu-label has-text-grey-light">
+                            <i class="fas fa-star has-text-warning"></i> Favorites
+                        </p>
+                        <div id="favorite-scripts" class="favorite-scripts">
+                            <div class="no-favorites has-text-grey has-text-centered p-3">
+                                <i class="far fa-star"></i><br>
+                                <small>No favorite scripts</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Scripts Section -->
+                    <div class="mb-5">
+                        <p class="menu-label has-text-grey-light">
+                            <i class="fas fa-clock"></i> Recently Used
+                        </p>
+                        <div id="recent-scripts" class="recent-scripts">
+                            <div class="no-recent has-text-grey has-text-centered p-3">
+                                <i class="fas fa-history"></i><br>
+                                <small>No recent scripts</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div>
+                        <p class="menu-label has-text-grey-light">
+                            <i class="fas fa-bolt"></i> Quick Actions
+                        </p>
+                        <div class="buttons is-vertical is-fullwidth">
+                            <button id="back-to-overview" class="button is-info is-small" style="display: none;">
+                                <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                                <span>Back to Overview</span>
+                            </button>
+                            <button id="clear-recent" class="button is-dark is-small">
+                                <span class="icon"><i class="fas fa-trash"></i></span>
+                                <span>Clear Recent</span>
+                            </button>
+                            <button id="clear-favorites" class="button is-dark is-small">
+                                <span class="icon"><i class="fas fa-star"></i></span>
+                                <span>Clear Favorites</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="column">
+                <!-- Script Overview -->
+                <div id="script-overview" class="script-overview p-4">
+                    <div class="mb-5">
+                        <h2 class="title is-3 has-text-light">Available Scripts</h2>
+                        <p class="subtitle is-6 has-text-grey-light">Choose a script to execute</p>
+                        <div class="tags">
+                            <span id="script-count" class="tag is-info is-medium">Loading...</span>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="field has-addons mb-5">
+                        <div class="control has-icons-left" style="width: 400px;">
+                            <input id="script-search" class="input is-rounded search-dark" type="text"
+                                placeholder="Search scripts...">
+                            <span class="icon is-left has-text-grey">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Script Grid -->
+                    <div id="script-grid" class="script-grid">
+                        <div class="column is-full has-text-centered">
+                            <div class="box box-dark">
+                                <i class="fas fa-spinner fa-pulse fa-2x mb-3 has-text-info"></i>
+                                <p class="has-text-light">Loading scripts...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Script Interface -->
+                <div id="script-interface" class="script-interface p-4" style="display: none;">
+                    <!-- Breadcrumb -->
+                    <nav class="breadcrumb mb-4" aria-label="breadcrumbs">
+                        <ul>
+                            <li><a id="breadcrumb-back" href="#" class="has-text-info"><i class="fas fa-home mr-2"></i>
+                                    Scripts</a></li>
+                            <li class="is-active"><a id="current-script-name" aria-current="page"
+                                    class="has-text-light">Current Script</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- Script Header -->
+                    <div class="box box-dark mb-4">
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <div>
+                                        <h2 id="script-title" class="title is-4 mb-2 has-text-light"></h2>
+                                        <p id="script-description" class="subtitle is-6 has-text-grey-light mb-2"></p>
+                                        <div class="tags">
+                                            <span id="script-version" class="tag is-info"></span>
+                                            <span id="script-author" class="tag is-dark"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <button id="toggle-favorite" class="button is-large button-dark">
+                                        <span class="icon">
+                                            <i id="favorite-icon" class="far fa-star"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Script Form -->
+                    <form id="script-form">
+                        <div id="form-fields" class="box box-dark"></div>
+
+                        <div class="field is-grouped is-grouped-right">
+                            <div class="control">
+                                <button type="button" id="clear-btn" class="button is-dark">
+                                    <span class="icon"><i class="fas fa-eraser"></i></span>
+                                    <span>Clear Form</span>
+                                </button>
+                            </div>
+                            <div class="control">
+                                <button type="submit" id="execute-btn" class="button is-primary">
+                                    <span class="icon"><i class="fas fa-play"></i></span>
+                                    <span>Execute Script</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Results -->
+                    <div id="result-section" class="mt-4" style="display: none;">
+                        <div class="notification notification-success-dark">
+                            <h4 class="title is-5 has-text-light">
+                                <i class="fas fa-check-circle"></i> Result
+                            </h4>
+                            <div class="box box-dark">
+                                <pre id="result-content" class="result-content"></pre>
+                            </div>
+                            <div id="result-metadata" class="tags mt-3"></div>
+                        </div>
+                    </div>
+
+                    <div id="error-section" class="mt-4" style="display: none;">
+                        <div class="notification notification-error-dark">
+                            <h4 class="title is-5 has-text-light">
+                                <i class="fas fa-exclamation-triangle"></i> Error
+                            </h4>
+                            <div class="box box-dark">
+                                <pre id="error-content" class="error-content"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/tymbr.js') }}"></script>
+</body>
+
+</html>
