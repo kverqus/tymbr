@@ -93,7 +93,6 @@ form:
 
 execution:
   timeout: 30
-  memory_limit: "128MB"
 ```
 
 ## Form Field Types
@@ -182,7 +181,6 @@ metadata:
 ```yaml
 execution:
   timeout: 60              # Timeout in seconds (default: 30)
-  memory_limit: "256MB"    # Memory limit (default: 128MB)
 ```
 
 ### Validation Patterns
